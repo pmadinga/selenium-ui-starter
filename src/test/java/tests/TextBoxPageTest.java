@@ -1,6 +1,7 @@
 package tests;
 
 import base.BaseTest;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import pages.TextBoxPage;
 
@@ -9,18 +10,13 @@ public class TextBoxPageTest extends BaseTest {
     void userCanSubmitAForm(){
         //Creating an instance of TextBoxPage via constructor
         TextBoxPage textBoxPage = new TextBoxPage(driver);
-
-        try {
-            Thread.sleep(5000);
-        }catch (InterruptedException e){
-            e.getMessage();
-        }
+        String inputName = "steve";
 
         //Open the web page
         textBoxPage.openSite();
 
         //Enter username
-        textBoxPage.enterUserName("steve");
+        textBoxPage.enterUserName(inputName);
 
         //Enter user email
         textBoxPage.enterUserEmail("steve@apple.com");
@@ -33,6 +29,9 @@ public class TextBoxPageTest extends BaseTest {
 
         //Click submit Btn
         textBoxPage.clickSubmitBtn();
+
+        //Assert that name is captured
+        Assertions.assertTrue(textBoxPage.getNameAssertion().contains("Name:" + inputName));
 
     }
 }
